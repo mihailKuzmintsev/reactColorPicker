@@ -7,28 +7,3 @@
   display: flex;
   flex-wrap: wrap;
 }
-
-.slider {
-  display: inline-block;
-  width: 400px;
-  margin: 10px 20px;
-}
-
-.rc-slider-track {
-  background-color: transparent;
-}
-.rc-slider-rail {
-  height: 7px;
-}
-.rc-slider-handle,
-.rc-slider-handle:focus,
-.rc-slider-handle:active,
-.rc-slider-handle:hover {
-  outline: none;
-  border: 2px solid green;
-  box-shadow: none;
-  background-color: green;
-  width: 15px;
-  height: 15px;
-  margin-top: -4px;
-}

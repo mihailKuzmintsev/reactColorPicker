@@ -9,7 +9,10 @@ const styles = {
     height: "100vh",
     display: "flex",
     alignItems: "flex-start",
-    justifyContent: "center"
+    justifyContent: "center",
+    "&:hover": {
+      cursor: "pointer"
+    }
   },
   container: {
     width: "50%",
@@ -33,6 +36,10 @@ const styles = {
 };
 
 class PaletteList extends Component {
+  goToPalette = id => {
+    this.props.history.push(`/palette/${id}`);
+  };
+
   render() {
     const { palettes, classes } = this.props;
 
@@ -44,9 +51,10 @@ class PaletteList extends Component {
           </nav>
           <div className={classes.palettes}>
             {palettes.map(palette => (
-              <Link to={`/palette/${palette.id}`}>
-                <MiniPalette {...palette} />
-              </Link>
+              <MiniPalette
+                {...palette}
+                handleClick={() => this.goToPalette(palette.id)}
+              />
             ))}
           </div>
         </div>

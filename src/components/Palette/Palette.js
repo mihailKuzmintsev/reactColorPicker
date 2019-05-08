@@ -37,6 +37,7 @@ export default class Palette extends Component {
           level={level}
           changeLevel={this.changeLevel}
           changeFormat={this.changeFormat}
+          showLevels
         />
         <div className="Palette-colors">{colorBoxes}</div>
         <Footer emoji={emoji} paletteName={paletteName} />

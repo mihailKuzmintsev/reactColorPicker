@@ -1,19 +1,19 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import Slider from 'rc-slider';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
-import Snackbar from '@material-ui/core/Snackbar';
-import IconButton from '@material-ui/core/IconButton';
-import CloseIcon from '@material-ui/icons/Close';
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import Slider from "rc-slider";
+import Select from "@material-ui/core/Select";
+import MenuItem from "@material-ui/core/MenuItem";
+import Snackbar from "@material-ui/core/Snackbar";
+import IconButton from "@material-ui/core/IconButton";
+import CloseIcon from "@material-ui/icons/Close";
 
-import 'rc-slider/assets/index.css';
-import './Navbar.css';
+import "rc-slider/assets/index.css";
+import "./Navbar.css";
 
 class Navbar extends Component {
   state = {
-    format: 'hex',
-    open: false,
+    format: "hex",
+    open: false
   };
 
   handleFormatChange = e => {
@@ -21,7 +21,7 @@ class Navbar extends Component {
 
     this.setState({
       format: currentFormat,
-      open: true,
+      open: true
     });
     this.props.changeFormat(currentFormat);
   };
@@ -31,7 +31,7 @@ class Navbar extends Component {
   };
 
   render() {
-    const { level, changeLevel } = this.props;
+    const { level, changeLevel, showLevels } = this.props;
     const { format } = this.state;
 
     return (
@@ -39,18 +39,20 @@ class Navbar extends Component {
         <div className="logo">
           <Link to="/">reactcolorpicker</Link>
         </div>
-        <div className="slider-container">
-          <span className="slider-level">Level: {level}</span>
-          <div className="slider">
-            <Slider
-              defaultValue={level}
-              min={100}
-              max={900}
-              step={100}
-              onAfterChange={changeLevel}
-            />
+        {showLevels && (
+          <div className="slider-container">
+            <span className="slider-level">Level: {level}</span>
+            <div className="slider">
+              <Slider
+                defaultValue={level}
+                min={100}
+                max={900}
+                step={100}
+                onAfterChange={changeLevel}
+              />
+            </div>
           </div>
-        </div>
+        )}
         <div className="select-container">
           <Select value={format} onChange={this.handleFormatChange}>
             <MenuItem value="hex">HEX - #ffffff</MenuItem>
@@ -60,14 +62,14 @@ class Navbar extends Component {
         </div>
         <Snackbar
           anchorOrigin={{
-            vertical: 'bottom',
-            horizontal: 'left',
+            vertical: "bottom",
+            horizontal: "left"
           }}
           open={this.state.open}
           autoHideDuration={3000}
           onClose={this.handleCloseSnackbar}
           ContentProps={{
-            'aria-describedby': 'message-id',
+            "aria-describedby": "message-id"
           }}
           message={
             <span id="message-id">
@@ -82,7 +84,7 @@ class Navbar extends Component {
               onClick={this.handleCloseSnackbar}
             >
               <CloseIcon />
-            </IconButton>,
+            </IconButton>
           ]}
         />
       </header>

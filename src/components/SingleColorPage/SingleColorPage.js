@@ -1,11 +1,18 @@
 import React, { Component } from "react";
 import ColorBox from "../ColorBox";
+import Navbar from "../Navbar";
+import Footer from "../Footer";
 
 class SingleColorPage extends Component {
   constructor(props) {
     super(props);
+    this.state = { format: "hex" };
     this._shades = this.getShades(this.props.palette, this.props.colorId);
   }
+
+  changeFormat = format => {
+    this.setState({ format });
+  };
 
   getShades = (palette, colorId) => {
     let shades = [];
@@ -13,18 +20,19 @@ class SingleColorPage extends Component {
     for (let shade in palette.colors) {
       shades.push(palette.colors[shade].find(color => colorId === color.id));
     }
-    console.log(shades);
     return shades.slice(1);
   };
 
   render() {
+    const { format } = this.state;
+    const { emoji, paletteName } = this.props.palette;
+
     const colorBoxes = this._shades.map(color => {
-      console.log(color);
       return (
         <ColorBox
-          color={color["hex"]}
+          color={color[format]}
           name={color.name}
-          key={color.id}
+          key={color.name}
           showMore={false}
         />
       );
@@ -32,8 +40,9 @@ class SingleColorPage extends Component {
 
     return (
       <div className="Palette">
-        <h1>Single COlor Page</h1>
+        <Navbar changeFormat={this.changeFormat} showLevels={false} />
         <div className="Palette-colors">{colorBoxes}</div>
+        <Footer emoji={emoji} paletteName={paletteName} />
       </div>
     );
   }
